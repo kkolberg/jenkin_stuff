@@ -1,0 +1,27 @@
+node("master") {
+
+println "Cleaning up offline slaves..."
+
+println "BURN THE NULL POINTER WITH FIRE"
+
+final List<Node> nodes = new ArrayList<Node>();
+
+nodes.addAll(Jenkins.instance.getNodes());
+
+    hudson.model.Hudson.instance.slaves.each {
+
+      if(it.getComputer()?.isOffline()) {
+
+        println "Deleting ${it.getNodeName()}"
+
+        nodes.remove(it);
+
+      }
+
+    }
+
+    Jenkins.instance.setNodes(nodes);
+
+    println "Done."
+
+}
